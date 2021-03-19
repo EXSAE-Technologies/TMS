@@ -26,7 +26,7 @@ class Db{
 	function get_all_items($table_name){
 		$sql = "SELECT * FROM ".$table_name;
 		$result = $this->conn->query($sql);
-		$data = $result->fetch_array();
+		$data = $result->fetch_all();
 		return $data;
 	}
 

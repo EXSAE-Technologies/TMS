@@ -2,7 +2,11 @@
 
 require_once("../includes/header.php");
 
-dsafsdf
+?>
+
+
+
+<?php
 
 require_once("../includes/footer.php");
 
