@@ -75,6 +75,9 @@ class Db{
 }
 
 class Users extends Db{
+
+	static $file = ["username", "first_name", "last_name", "contact_number", "email", "tms_group_id", "image_url", "status"];
+
 	function get_user_by_id($user_id){
 		return $this->get_item_by_id("tms_users", $user_id);
 	}
@@ -116,11 +119,92 @@ class Users extends Db{
 		}
 
 		$fields = ["username", "first_name", "last_name", "contact_number", "email", "tms_group_id", "image_url", "status"];
-		$result = $this->update_user_by_id("tms_users", $id, $fields, [$username, $first_name, $last_name, $contact_number, $email, $tms_group_id, $image_url, $status]);
+		$result = $this->update_item_by_id("tms_users", $id, $fields, [$username, $first_name, $last_name, $contact_number, $email, $tms_group_id, $image_url, $status]);
 	}
 
 	function delete_user($user_id){
 		$result = $this->delete_item_by_id("tms_users", $user_id);
+	}
+
+	//User forms
+	function add_user_form($action=""){
+		$html = '
+			<form action="'.$action.'" method="post">
+				<input type="hidden" name="type" value="add-user">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input class="form-control" type="text" name="username" placeholder="Pick a username">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input class="form-control" type="text" name="first_name" placeholder="Enter first name">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input class="form-control" type="text" name="last_name" placeholder="Enter last name">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input class="form-control" type="text" name="contact_number" placeholder="Enter phone number">
+					</div>
+				</div>
+				<button type="submit" class="btn btn-success">Sign Up</button>
+			</form>
+		';
+
+		return $html;
+	}
+
+	function edit_user_form($user_id, $action=""){
+
+		$user = $this->get_user_by_id($user_id);
+
+		$html = '
+			<form action="'.$action.'" method="post">
+				<input type="hidden" name="id" value="'.$user["id"].'">
+				<input type="hidden" name="type" value="update-user">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input class="form-control" type="text" name="username" value="'.$user["username"].'" placeholder="Pick a username">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input class="form-control" type="text" name="first_name" value="'.$user["first_name"].'" placeholder="Enter first name">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input class="form-control" type="text" name="last_name" value="'.$user["last_name"].'" placeholder="Enter last name">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input class="form-control" type="text" name="contact_number" value="'.$user["contact_number"].'" placeholder="Enter phone number">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input class="form-control" type="email" name="email" value="'.$user["email"].'" placeholder="Enter E-mail">
+					</div>
+				</div>
+				<button class="btn btn-success">Update</button>
+			</form>
+		';
+
+		return $html;
 	}
 }
 ?>

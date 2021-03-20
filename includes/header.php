@@ -1,6 +1,8 @@
 <?php
 
+$root = "/tms/";
 require_once("db-conn.php");
+require_once("components.php");
 
 ?>
 <!doctype html>

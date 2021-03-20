@@ -2,6 +2,9 @@
 
 require_once("../includes/header.php");
 
+$components = new Components($root);
+
+echo $components->admin_navbar();
 ?>
 
 
