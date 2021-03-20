@@ -76,7 +76,7 @@ class Db{
 
 class Users extends Db{
 
-	static $file = ["username", "first_name", "last_name", "contact_number", "email", "tms_group_id", "image_url", "status"];
+	static $fields = ["username", "first_name", "last_name", "contact_number", "email", "tms_group_id", "image_url", "status"];
 
 	function get_user_by_id($user_id){
 		return $this->get_item_by_id("tms_users", $user_id);
@@ -86,7 +86,7 @@ class Users extends Db{
 		return $this->get_all_items("tms_users");
 	}
 
-	function add_user($username, $first_name, $last_name, $contact_number, $email="", $tms_group_id=2, $image_url="", $status="DEACTIVATED"){
+	function add_user($username, $first_name, $last_name, $contact_number, $email="", $tms_group_id=2, $image_url="assets/user-data/default-profile.png", $status="DEACTIVATED"){
 		$fields = ["username", "first_name", "last_name", "contact_number", "email", "tms_group_id", "image_url", "status"];
 		$result = $this->post_item("tms_users", $fields, [$username, $first_name, $last_name, $contact_number, $email, $tms_group_id, $image_url, $status]);
 	}

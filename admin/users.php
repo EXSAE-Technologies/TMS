@@ -48,7 +48,7 @@ echo $users->add_user_form();
 	?>
 	<tr>
 		<td><?php echo $userObject[0]; ?></td>
-		<td><?php echo $userObject[1]; ?></td>
+		<td><a href="<?php echo $root.'admin/user-profile.php?user_id='.$userObject[0]; ?>"><?php echo $userObject[1]; ?></a></td>
 		<td><?php echo $userObject[2]; ?></td>
 		<td><?php echo $userObject[3]; ?></td>
 		<td><?php echo $userObject[8]; ?></td>
