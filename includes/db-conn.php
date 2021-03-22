@@ -207,4 +207,26 @@ class Users extends Db{
 		return $html;
 	}
 }
+
+class Subjects extends Db {
+
+	public $fields = ["name", "level", "image_url"];
+	public $table_name = "tms_subjects";
+
+	function get_subject_by_id($subject_id){
+		return $this->get_item_by_id($this->table_name, $subject_id);
+	}
+
+	function get_all_subjects(){
+		return $this->get_all_items($this->table_name);
+	}
+
+	function add_subject($name, $level, $image_url="assets/images/default-subject.png"){
+		$result = $this->post_item($this->table_name, $this->fields, [$name, $level, $image_url]);
+	}
+
+	function delete_subject($subject_id){
+		$result = $this->delete_item_by_id($this->table_name, $subject_id);
+	}
+}
 ?>
